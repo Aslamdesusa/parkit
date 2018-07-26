@@ -29,7 +29,7 @@ const routes = [
 			if (err){
 				reply('error in getting data.....')		
 			}else{
-				reply.view('typo', {cardetails : data},{layout: 'layout2'});
+				reply.view('typo', {details : data},{layout: 'layout2'});
 			}
 		}); 	   
 	}
@@ -39,17 +39,16 @@ const routes = [
 		path: '/deleting/parkingslot/{uuid}',
 		handler: function(request, h){
 		var parkings = ({
-			"Registration": '',
-			"Color": '',
+			Registration: '',
+			Color: '',
 		});
 		//find car data by his ID and updateing it to null value.
-		parkingModel.findOne({_id: request.params.uuid}, function(error, data){
+		parkingModel.findOneAndUpdate({"_id": request.params.uuid}, parkings, function(error, data){
 			if(error){
-				return reply('err deleting data')
+				h('err deleting data')
 			}else{
 				console.log(data)
-				h(data)
-				// return reply.view('sweetalert', {message: 'data successfully deleted from databases', parking: data}, {layout: 'layout2'})
+				return h.view('sweetalert', {message: 'data successfully deleted from databases', parking: data}, {layout: 'layout2'})
 			}
 		});
 	}
@@ -67,34 +66,5 @@ const routes = [
 		})
 	}
 },
-
-	{
-    	method: 'GET',
-    	path: '/get/complaint/by/{uuid}',
-    	config:{
-       		validate:{
-				params:{
-					uuid:Joi.string().required()
-				}
-			}
-		},
-    	handler: function(request, reply){
-    		parkingModel.findOne({_id :request.params.uuid}, function(err, data){
-    			if (err) {
-    				reply({
-    					statusCode: 503,
-    					message: 'no metch found',
-    					data: err
-    				});
-    			}else{
-    				reply({
-    					statusCode: 200,
-    					message: "your data has been found results are here.",
-    					data: data
-    				});
-    			}
-    		});
-    	}
-    },
 ]
 export default routes;
