@@ -22,14 +22,14 @@ const routes = [
 },
 {
 	method: 'GET',
-	path: '/view/all/parking_slot',
+	path: '/',
 	handler: (request, reply) =>{
 		// db.orders.find().count()
 		parkingModel.find({},(err, data) => {
 			if (err){
 				reply('error in getting data.....')		
 			}else{
-				reply.view('typo', {details : data},{layout: 'layout2'});
+				reply.view('index', {details : data},{layout: 'layout2'});
 			}
 		}); 	   
 	}
