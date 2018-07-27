@@ -3,10 +3,8 @@ const Mongoose = require('mongoose');
 
 // MAKING connection with mlab using parkingslote database uri
 const mongoDbUri = 'mongodb://parking:parking123@ds255451.mlab.com:55451/parking_lots';
-// const parking_database = 'mongodb://parkingslote:parking123@ds253821.mlab.com:53821/parking_lot'
 
-// const mongoDbUri = mongoDbUri;
-// Making connection with 'MongoDB'
+// Making connection with 'Mlab databash'
 Mongoose.connect(mongoDbUri, { useMongoClient:true })
 
 //Variable to store the database connection

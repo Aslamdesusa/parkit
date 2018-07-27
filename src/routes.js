@@ -38,10 +38,11 @@ const routes = [
 		method: 'GET',
 		path: '/deleting/parkingslot/{uuid}',
 		handler: function(request, h){
-		var parkings = ({
-			Registration: '',
-			Color: '',
-		});
+			var rendom = Math.floor(Math.random() * 90000) + 10000;
+			var parkings = ({
+				Registration: rendom,
+				Color: '',
+			});
 		//find car data by his ID and updateing it to null value.
 		parkingModel.findOneAndUpdate({"_id": request.params.uuid}, parkings, function(error, data){
 			if(error){
